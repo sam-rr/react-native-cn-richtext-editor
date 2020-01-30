@@ -99,7 +99,8 @@ const editorHTML = `
                 sendMessage(contentChanged);
             }, false);
 
-            var applyToolbar = function(toolType, value = '') {
+            var applyToolbar = function(toolType, value) {
+                if (value === undefined) value = '';
                 switch (toolType) {
                     case 'bold':
                         document.execCommand('bold', false, '');
