@@ -37,20 +37,20 @@ const editorHTML = `
             var editor = document.getElementById('editor');
             editor.contentEditable = true;
 
-            var getSelectedStyles = () => {
-                let styles = [];
+            var getSelectedStyles = function() {
+                var styles = [];
                 document.queryCommandState('bold') && styles.push('bold');
                 document.queryCommandState('italic') && styles.push('italic');
                 document.queryCommandState('underline') && styles.push('underline');
                 document.queryCommandState('strikeThrough') && styles.push('lineThrough');
 
-                const fColor = document.queryCommandValue('foreColor');
-                const bgColor = document.queryCommandValue('backColor');
-                const colors = {
+                var fColor = document.queryCommandValue('foreColor');
+                var bgColor = document.queryCommandValue('backColor');
+                var colors = {
                         color: fColor,
                         highlight: bgColor
                     };
-                const stylesJson = JSON.stringify({
+                var stylesJson = JSON.stringify({
                     type: 'selectedStyles',
                     data: {styles, colors}});
                     sendMessage(stylesJson);
@@ -58,12 +58,12 @@ const editorHTML = `
 
             }
 
-            var sendMessage = (message) => {
+            var sendMessage = function(message) {
               window.ReactNativeWebView.postMessage(message);
             }
 
-            var getSelectedTag = () => {
-                let tag = document.queryCommandValue('formatBlock');
+            var getSelectedTag = function() {
+                var tag = document.queryCommandValue('formatBlock');
                 if(document.queryCommandState('insertUnorderedList'))
                     tag = 'ul';
                 else if(document.queryCommandState('insertorderedlist'))
@@ -81,25 +81,26 @@ const editorHTML = `
                     default:
                         break;
                 }
-                const stylesJson = JSON.stringify({
+                var stylesJson = JSON.stringify({
                     type: 'selectedTag',
                     data: tag});
                 sendMessage(stylesJson);
             }
 
-            document.addEventListener('selectionchange', () => {
+            document.addEventListener('selectionchange', function() {
                 getSelectedStyles();
                 getSelectedTag();
             });
 
             document.getElementById("editor").addEventListener("input", function() {
-                let contentChanged = JSON.stringify({
+                var contentChanged = JSON.stringify({
                     type: 'onChange',
                     data: document.getElementById("editor").innerHTML });
                 sendMessage(contentChanged);
             }, false);
 
-            var applyToolbar = (toolType, value = '') => {
+            var applyToolbar = function(toolType, value) {
+                if (value === undefined) value = '';
                 switch (toolType) {
                     case 'bold':
                         document.execCommand('bold', false, '');
@@ -161,7 +162,7 @@ const editorHTML = `
                 getSelectedTag();
             }
 
-            var getRequest = (event) => {
+            var getRequest = function(event) {
                  
               var msgData = JSON.parse(event.data);
               if(msgData.type === 'toolbar') {
