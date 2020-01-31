@@ -30,13 +30,11 @@ const editorHTML = `
 </head>
 <body>
     <div id="editor" contenteditable="true">
-       Loading...
+       
     </div>
     <script>
         (function(doc) {
             var editor = document.getElementById('editor');
-            editor.innerHTML = '';
-            //editor.contentEditable = true;
 
             var getSelectedStyles = function() {
                 var styles = [];
