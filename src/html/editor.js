@@ -35,6 +35,7 @@ const editorHTML = `
     <script>
         (function(doc) {
             var editor = document.getElementById('editor');
+            editor.innerHTML = '';
             //editor.contentEditable = true;
 
             var getSelectedStyles = function() {

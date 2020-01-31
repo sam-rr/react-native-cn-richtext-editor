@@ -164,6 +164,7 @@ export default class CNEditor extends Component {
         if(this.props.initialHtml) {
             this.setHtml(this.props.initialHtml);
         }
+        if (this.props.onLoad) this.props.onLoad();
     }
 
     onLayout = (event) => {
