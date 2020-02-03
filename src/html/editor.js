@@ -29,12 +29,13 @@ const editorHTML = `
     <title>CN-Editor</title>
 </head>
 <body>
-    <div id="editor" contenteditable="true">
+    <div id="editor">
        
     </div>
     <script>
         (function(doc) {
             var editor = document.getElementById('editor');
+            editor.contentEditable = true;
 
             var getSelectedStyles = function() {
                 var styles = [];
