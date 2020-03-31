@@ -29,7 +29,7 @@ const editorHTML = `
     <title>CN-Editor</title>
 </head>
 <body>
-    <div id="editor">
+    <div id="editor" contentEditable>
        
     </div>
     <script>

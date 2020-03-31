@@ -241,10 +241,10 @@ export default class CNEditor extends Component {
     }
 
     render() {
-    
-    return (
+      const { renderError } = this.props;
+      return (
         <View style={styles.container}
-        onLayout={this.onLayout}>
+          onLayout={this.onLayout}>
             <WebView 
             style={styles.webView}
             ref={webView=> this.webViewRef = webView}
@@ -259,7 +259,7 @@ export default class CNEditor extends Component {
             domStorageEnabled={true}
             mixedContentMode='always'
             onMessage={this.onMessage}
-			renderError={(error)=>console.log('error:',error)}
+			      renderError={renderError !== undefined ? renderError : (error)=>console.log('error:',error)}
             />
         </View>
     );
